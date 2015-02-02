@@ -14,7 +14,7 @@ import com.ryan.ryanapp.R;
 import com.ryan.ryanapp.RyanApp;
 import com.ryan.ryanapp.Utils.FileUtils;
 import com.ryan.ryanapp.Utils.StringUtil;
-import com.ryan.ryanapp.leancloud.UniversualImageLoaderUtils;
+import com.ryan.ryanapp.Utils.UniversualImageLoaderUtils;
 import com.ryan.ryanapp.model.Size;
 
 import android.app.Activity;
@@ -26,7 +26,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.provider.MediaStore.Images.ImageColumns;
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,7 +55,7 @@ public class FragmentImageLibraryBrowser extends FragmentBase {
         return fragmentRootView;
     }
 
-    @Override public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+    @Override public void onActivityCreated( Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initView();
     }

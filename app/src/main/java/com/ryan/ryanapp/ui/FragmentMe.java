@@ -13,18 +13,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.avos.avoscloud.AVException;
-import com.avos.avoscloud.AVUser;
-import com.avos.avoscloud.SaveCallback;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.ryan.ryanapp.Constants;
 import com.ryan.ryanapp.R;
 import com.ryan.ryanapp.Utils.LogUtils;
 import com.ryan.ryanapp.Utils.StringUtil;
-import com.ryan.ryanapp.leancloud.FileLoadingListener;
-import com.ryan.ryanapp.leancloud.LeanCloudUtils;
-import com.ryan.ryanapp.leancloud.UniversualImageLoaderUtils;
-import com.ryan.ryanapp.leancloud.bean.User;
 
 import java.io.File;
 import java.util.HashMap;
@@ -94,31 +86,6 @@ public class FragmentMe extends FragmentBase {
                     File headImageFile = new File(headImageLocalPath);
                     if(headImageFile.exists() && headImageFile.length() > 0) {
                         LogUtils.e(TAG, " 裁切的图片………… " + headImageLocalPath);
-                        ImageLoader.getInstance().displayImage(Uri.fromFile(new File(headImageLocalPath)).toString(), headImageView, UniversualImageLoaderUtils.getDisplayImageOptions());
-                        LeanCloudUtils.uploadFile(headImageLocalPath, Constants.FileType.IMAGE, new FileLoadingListener() {
-                            @Override public void onFileLoadingProgress(Integer progress) {
-
-                            }
-                            @Override public void onFileLoadingDone(boolean succeed, String fileUrl, String result) {
-                                if(succeed) {
-                                    final String headImage = AVUser.getCurrentUser(User.class).getHeadImage();
-                                    AVUser.getCurrentUser(User.class).setHeadImage(fileUrl);
-                                    AVUser.getCurrentUser(User.class).saveInBackground(new SaveCallback() {
-                                        @Override public void done(AVException e) {
-                                            if(e == null) {
-                                                Toast.makeText(getActivity(), "图像设置成功", Toast.LENGTH_SHORT).show();
-                                            } else {
-                                                AVUser.getCurrentUser(User.class).setHeadImage(headImage);
-                                                Toast.makeText(getActivity(), "图像设置失败", Toast.LENGTH_SHORT).show();
-                                            }
-                                        }
-                                    });
-                                } else {
-                                    Toast.makeText(getActivity(), "图像上传失败", Toast.LENGTH_SHORT).show();
-                                }
-
-                            }
-                        });
                     }
                     break;
             }
@@ -135,11 +102,6 @@ public class FragmentMe extends FragmentBase {
     @Override
     public void onResume() {
         super.onResume();
-        String headImage = AVUser.getCurrentUser(User.class).getHeadImage();
-        if(!StringUtil.isEmpty(headImage)) {
-            ImageLoader.getInstance().displayImage(headImage, headImageView, UniversualImageLoaderUtils.getDisplayImageOptions());
-        }
-        nicknameView.setText(AVUser.getCurrentUser(User.class).getUsername());
     }
 
     @Override public void onClick(View v) {

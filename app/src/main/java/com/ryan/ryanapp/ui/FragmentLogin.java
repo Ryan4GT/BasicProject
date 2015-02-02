@@ -15,8 +15,6 @@ import android.widget.Toast;
 
 import com.ryan.ryanapp.R;
 import com.ryan.ryanapp.Utils.StringUtil;
-import com.ryan.ryanapp.leancloud.LeanCloudUtils;
-import com.ryan.ryanapp.leancloud.LoginOrSignupResultListener;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -108,28 +106,6 @@ public class FragmentLogin extends FragmentBase {
             focusView.requestFocus();
         } else {
             showProgress(true);
-            LeanCloudUtils.login(email, password, new LoginOrSignupResultListener() {
-                @Override public void onLoginOrSignupResult(boolean succeed, String result) {
-                    if(succeed) {
-                        getActivity().finish();
-                    }else{
-                        if(result.equals("211")){
-                            LeanCloudUtils.signup(email, password, new LoginOrSignupResultListener() {
-                                @Override public void onLoginOrSignupResult(boolean succeed, String result) {
-                                    if(succeed){
-                                        getActivity().finish();
-                                    }else{
-                                        Toast.makeText(getActivity(), result + " : Signup failed", Toast.LENGTH_SHORT).show();
-                                    }
-                                }
-                            });
-                        }else{
-                            Toast.makeText(getActivity(), result + " : Login failed", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                    mProgressView.setVisibility(View.GONE);
-                }
-            });
         }
     }
 

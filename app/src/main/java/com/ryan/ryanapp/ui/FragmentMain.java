@@ -1,29 +1,16 @@
 package com.ryan.ryanapp.ui;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.annotation.TargetApi;
 import android.app.Activity;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.avos.avoscloud.AVException;
-import com.avos.avoscloud.AVUser;
-import com.avos.avoscloud.CountCallback;
-import com.avos.avoscloud.FindCallback;
 import com.ryan.ryanapp.R;
-import com.ryan.ryanapp.Utils.LogUtils;
-import com.ryan.ryanapp.leancloud.bean.User;
 
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 public class FragmentMain extends FragmentBase {
@@ -59,7 +46,6 @@ public class FragmentMain extends FragmentBase {
 
     @Override public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        final TextView textView = (TextView) fragmentRootView.findViewById(R.id.textView);
 
     }
 }

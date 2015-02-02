@@ -6,13 +6,9 @@ import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.WindowManager;
 
-import com.ryan.ryanapp.leancloud.UniversualImageLoaderUtils;
-import com.ryan.ryanapp.leancloud.bean.TestAVObject;
+import com.ryan.ryanapp.Utils.UniversualImageLoaderUtils;
 import com.ryan.ryanapp.model.Size;
 
-import com.ryan.ryanapp.leancloud.bean.Goods;
-import com.ryan.ryanapp.leancloud.LeanCloudUtils;
-import com.ryan.ryanapp.leancloud.bean.GoodsComment;
 
 
 /**
@@ -29,8 +25,6 @@ public class RyanApp extends Application {
     public void onCreate() {
         super.onCreate();
         instance = this;
-        Class[] clazz = new Class[]{Goods.class, GoodsComment.class, TestAVObject.class};
-        LeanCloudUtils.initLeanCloud(this, false, clazz);
         UniversualImageLoaderUtils.initImageLoader(getApplicationContext());
     }
 
